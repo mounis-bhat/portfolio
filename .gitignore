@@ -9,3 +9,6 @@ build
 
 # Lockfile
 yarn.lock
+
+# Next
+.next
