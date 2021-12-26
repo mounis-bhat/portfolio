@@ -12,7 +12,7 @@ const LogoBox = styled.div`
   line-height: 20px;
   padding: 10px;
 
-  &:hover {
+  &:hover img {
     transform: rotate(30deg);
   }
 `
@@ -23,9 +23,9 @@ const Logo = () => {
     <Link href="/">
       <a>
         <LogoBox>
-          <Image src={logoImg} alt="Logo" width="20" height="20" />
+          <Image src={logoImg} alt="Logo" width={20} height={20} />
           <Text
-            color={useColorModeValue("gray.400", "whiteAlpha.900")}
+            color={useColorModeValue("gray.800", "whiteAlpha.900")}
             fontFamily="M PLUS Rounded 1c"
             fontWeight="bold"
             ml={3}
