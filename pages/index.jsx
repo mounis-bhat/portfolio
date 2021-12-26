@@ -1,4 +1,4 @@
-import { Container, Box, Heading } from '@chakra-ui/react'
+import { Container, Box, Heading } from "@chakra-ui/react"
 
 const index = () => {
   return (
@@ -7,7 +7,7 @@ const index = () => {
         Hey there! I'm a software engineer working in the web industry.
       </Box>
 
-      <Box display={{ md: 'flex' }}>
+      <Box display={{ md: "flex" }}>
         <Box flexGrow={1}>
           <Heading as="h2" variant="page-title">
             Mounis Bhat

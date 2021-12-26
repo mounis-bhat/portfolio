@@ -1,5 +1,5 @@
-import { ChakraProvider } from '@chakra-ui/react'
-import Main from '../components/layouts/Main'
+import { ChakraProvider } from "@chakra-ui/react"
+import Main from "../components/layouts/Main"
 
 const App = ({ Component, pageProps, router }) => {
   return (
