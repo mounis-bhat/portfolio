@@ -18,12 +18,12 @@ const LogoBox = styled.div`
 `
 
 const Logo = () => {
-  const logoImg = `/images/m${useColorModeValue("", "-dark")}.png`
+  const logoImg = `/images/m${useColorModeValue("", "-dark")}.svg`
   return (
     <Link href="/">
       <a>
         <LogoBox>
-          <Image src={logoImg} alt="Logo" width={20} height={20} />
+          <Image src={logoImg} alt="Logo" width={30} height={30} />
           <Text
             color={useColorModeValue("gray.800", "whiteAlpha.900")}
             fontFamily="M PLUS Rounded 1c"
