@@ -20,12 +20,14 @@ const index = () => {
         Hey there! I'm a software engineer working in the web industry.
       </Box>
 
-      <Box display={{ md: "flex" }}>
-        <Box flexGrow={1}>
+      <Box
+      // display={{ md: "flex" }}
+      >
+        <Box flexGrow={1} align="center" mb={6}>
           <Heading as="h2" variant="page-title">
             Mounis Bhat
           </Heading>
-          <p>Developer / Digital Artist</p>
+          <p>Full-stack Developer / Digital Artist</p>
         </Box>
         <Box
           flexShrink={0}
@@ -37,7 +39,7 @@ const index = () => {
             borderColor="whiteAlpha.800"
             borderWidth={2}
             borderStyle="solid"
-            maxWidth="100px"
+            maxWidth="150px"
             display="inline-block"
             borderRadius="full"
             src="/images/mounis.jpg"
