@@ -1,4 +1,3 @@
-import Logo from "./Logo"
 import NextLink from "next/link"
 import {
   Container,
@@ -16,6 +15,7 @@ import {
 } from "@chakra-ui/react"
 import { HamburgerIcon } from "@chakra-ui/icons"
 
+import Logo from "./Logo"
 import ThemeToggleButton from "./ThemeToggleButton"
 
 const LinkItem = ({ href, children, path }) => {
@@ -59,22 +59,21 @@ const Navbar = props => {
             <Logo />
           </Heading>
         </Flex>
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          display={{ base: "none", md: "flex" }}
-          width={{ base: "full", md: "auto" }}
-          alignItems="center"
-          flexGrow={1}
-          mt={{ base: 4, nmd: 0 }}
-        >
-          <LinkItem href="/works" path={path}>
-            Works
-          </LinkItem>
-          <LinkItem href="/posts" path={path}>
-            Posts
-          </LinkItem>
-        </Stack>
+
         <Box flex={1} align="right">
+          <Stack
+            direction={{ base: "none", md: "row" }}
+            display={{ base: "none", md: "inline-block" }}
+            width={{ base: "none", md: "auto" }}
+            align="center"
+            flexGrow={1}
+            mr={4}
+          >
+            <LinkItem href="/works" path={path}>
+              Works
+            </LinkItem>
+          </Stack>
+
           <ThemeToggleButton />
           <Box ml={2} display={{ base: "inline-block", md: "none" }}>
             <Menu>

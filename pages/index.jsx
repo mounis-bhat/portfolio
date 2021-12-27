@@ -1,10 +1,17 @@
+import NextLink from "next/link"
 import {
   Container,
   Box,
   Heading,
   Image,
-  useColorModeValue
+  Link,
+  useColorModeValue,
+  Button
 } from "@chakra-ui/react"
+import { ChevronRightIcon } from "@chakra-ui/icons"
+
+import Section from "../components/Section"
+import Paragraph from "../components/Paragraph"
 
 const index = () => {
   return (
@@ -47,6 +54,24 @@ const index = () => {
           />
         </Box>
       </Box>
+      <Section delay={0.1}>
+        <Heading as="h3" variant="section-title">
+          Work
+        </Heading>
+        <Paragraph>
+          I'm a Full-stack Developer based in Kashmir, currently working at{" "}
+          {<Link href="https://www.noqod.com.sd/">Noqod.</Link>} I have a
+          passion for designing elegant user experience and writing clean and
+          efficient code.
+        </Paragraph>
+        <Box align="center" my={4}>
+          <NextLink href="works">
+            <Button rightIcon={<ChevronRightIcon />} colorScheme="teal">
+              My Portfolio
+            </Button>
+          </NextLink>
+        </Box>
+      </Section>
     </Container>
   )
 }

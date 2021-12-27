@@ -2,7 +2,7 @@
 node_modules
 
 # Build
-build
+.next
 
 # Environment
 .env
@@ -10,9 +10,6 @@ build
 # Lockfile
 yarn.lock
 package-lock.json
-
-# Next
-.next
 
 #Babel Config
 .babelrc
