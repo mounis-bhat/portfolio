@@ -12,6 +12,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons"
 
 import Section from "../components/Section"
 import Paragraph from "../components/Paragraph"
+import { BioSection, BioYear } from "../components/Bio"
 
 const index = () => {
   return (
@@ -71,6 +72,34 @@ const index = () => {
             </Button>
           </NextLink>
         </Box>
+      </Section>
+      <Section delay={0.2}>
+        <Heading as="h3" variant="section-title">
+          Bio
+        </Heading>
+        <BioSection>
+          <BioYear>19**</BioYear>
+          Born in Srinagar, Kashmir.
+        </BioSection>
+        <BioSection>
+          <BioYear>20**</BioYear>
+          Graduated as an CS engineer from{" "}
+          <Link href="https://www.cuchd.in/">Chandigarh University </Link>
+        </BioSection>
+
+        <BioSection>
+          <BioYear>20**</BioYear>
+          Working full-time as a Front-end Developer at{" "}
+          {<Link href="https://www.noqod.com.sd/">Noqod.</Link>}
+        </BioSection>
+      </Section>
+      <Section delay={0.3}>
+        <Heading as="h3" variant="section-title">
+          I ❤
+        </Heading>
+        <Paragraph>
+          Art, Photography, Design, Singing, Technology, Travel, Hiking
+        </Paragraph>
       </Section>
     </Container>
   )
