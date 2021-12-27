@@ -2,7 +2,8 @@ import { ChakraProvider } from "@chakra-ui/react"
 
 import Main from "../components/layouts/Main"
 import theme from "../libs/theme"
-import Fonts from "../components/fonts"
+import Fonts from "../components/Fonts"
+
 
 const App = ({ Component, pageProps, router }) => {
   return (
