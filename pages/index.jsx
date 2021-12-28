@@ -31,16 +31,10 @@ const index = () => {
       <Box
       // display={{ md: "flex" }}
       >
-        <Box flexGrow={1} align="center" mb={6}>
-          <Heading as="h2" variant="page-title">
-            Mounis Bhat
-          </Heading>
-          <p>Full-stack Developer / Digital Artist</p>
-        </Box>
         <Box
           flexShrink={0}
           mt={{ base: 4, md: 0 }}
-          ml={{ md: 6 }}
+          // ml={{ md: 6 }}
           align="center"
         >
           <Image
@@ -53,6 +47,12 @@ const index = () => {
             src="/images/mounis.jpg"
             alt="Profile Image"
           />
+        </Box>
+        <Box flexGrow={1} align="center" mb={6}>
+          <Heading as="h2" variant="page-title">
+            Mounis Bhat
+          </Heading>
+          <p>Full-stack Developer / Digital Artist</p>
         </Box>
       </Box>
       <Section delay={0.1}>
