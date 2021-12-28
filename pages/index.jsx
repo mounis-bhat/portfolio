@@ -1,18 +1,27 @@
 import NextLink from "next/link"
 import {
-  Container,
   Box,
-  Heading,
-  Image,
+  Icon,
+  List,
   Link,
-  useColorModeValue,
-  Button
+  Image,
+  Button,
+  Heading,
+  ListItem,
+  Container,
+  useColorModeValue
 } from "@chakra-ui/react"
 import { ChevronRightIcon } from "@chakra-ui/icons"
+import {
+  IoLogoGithub,
+  IoLogoTwitter,
+  IoLogoLinkedin,
+  IoLogoInstagram
+} from "react-icons/io5"
 
-import Article from "../components/layouts/Article"
 import Section from "../components/Section"
 import Paragraph from "../components/Paragraph"
+import Article from "../components/layouts/Article"
 import { BioSection, BioYear } from "../components/Bio"
 
 const index = () => {
@@ -95,7 +104,62 @@ const index = () => {
             {<Link href="https://www.noqod.com.sd/">Noqod.</Link>}
           </BioSection>
         </Section>
+
         <Section delay={0.3}>
+          <Heading as="h3" variant="section-title">
+            On the Web
+          </Heading>
+          <List>
+            <ListItem>
+              <Link href="https://instagram.com/mounis_" target="_blank">
+                <Button
+                  variant="ghost"
+                  colorScheme="teal"
+                  leftIcon={<Icon as={IoLogoInstagram} />}
+                >
+                  @mounis_
+                </Button>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="https://twitter.com/mounis_" target="_blank">
+                <Button
+                  variant="ghost"
+                  colorScheme="teal"
+                  leftIcon={<Icon as={IoLogoTwitter} />}
+                >
+                  @mounis_
+                </Button>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="https://github.com/mounis-bhat" target="_blank">
+                <Button
+                  variant="ghost"
+                  colorScheme="teal"
+                  leftIcon={<Icon as={IoLogoGithub} />}
+                >
+                  @mounis-bhat
+                </Button>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link
+                href="https://www.linkedin.com/in/mounis-bhat/"
+                target="_blank"
+              >
+                <Button
+                  variant="ghost"
+                  colorScheme="teal"
+                  leftIcon={<Icon as={IoLogoLinkedin} />}
+                >
+                  @mounis-bhat
+                </Button>
+              </Link>
+            </ListItem>
+          </List>
+        </Section>
+        <Section delay={0.4}>
           <Heading as="h3" variant="section-title">
             I ❤
           </Heading>
