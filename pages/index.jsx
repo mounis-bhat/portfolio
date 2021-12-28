@@ -83,13 +83,13 @@ const index = () => {
         </BioSection>
         <BioSection>
           <BioYear>20**</BioYear>
-          Graduated as an CS engineer from{" "}
+          Graduated from{" "}
           <Link href="https://www.cuchd.in/">Chandigarh University </Link>
         </BioSection>
 
         <BioSection>
           <BioYear>20**</BioYear>
-          Working full-time as a Front-end Developer at{" "}
+          Working full-time at{" "}
           {<Link href="https://www.noqod.com.sd/">Noqod.</Link>}
         </BioSection>
       </Section>
