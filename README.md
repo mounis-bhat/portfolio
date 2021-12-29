@@ -1,12 +1,12 @@
 # Personal Portfolio
 
-A minimal portfolio that showcases my work!
+A minimal portfolio that showcases my work! Please go through the about section of this repository to browse the project online or click [here!](https://mounis.vercel.app)
 
 # Hi, I'm Mounis! 👋
 
 ## 🚀 About Me
 
-I'm a full stack developer...
+I'm a full stack developer(aka labour)...
 
 ## Requirements
 
