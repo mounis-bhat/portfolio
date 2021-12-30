@@ -42,12 +42,6 @@ Start the server
   npm run dev / yarn dev
 ```
 
-## Screenshots
-
-![App Screenshot](https://i.imgur.com/qkkLcZJ.png)
-
-![App Screenshot](https://i.imgur.com/plf9eGn.png)
-
 ## License
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/mounis-bhat/portfolio/blob/main/LICENSE)
