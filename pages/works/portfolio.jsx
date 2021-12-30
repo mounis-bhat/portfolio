@@ -30,19 +30,17 @@ const Work = () => {
         <List ml={4} my={4}>
           <ListItem>
             <Meta>Website</Meta>
-            <Link href="https://mounis.vercel.app/" ml={5}>
+            <Link href="https://mounis.vercel.app/">
               Mounis Bhat <ExternalLinkIcon mx="2px" />
             </Link>
           </ListItem>
           <ListItem>
             <Meta>Platform</Meta>
-            <span style={{ marginLeft: "8px" }}>Web</span>
+            <span>Web</span>
           </ListItem>
           <ListItem>
             <Meta>Stack</Meta>
-            <span style={{ marginLeft: "34px" }}>
-              Next JS, Chakra UI, Framer Motion
-            </span>
+            <span>Next JS, Chakra UI, Framer Motion</span>
           </ListItem>
         </List>
       </Container>
