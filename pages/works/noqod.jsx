@@ -30,17 +30,17 @@ const Work = () => {
         <List ml={4} my={4}>
           <ListItem>
             <Meta>Website</Meta>
-            <Link href="http://access.noqod.com.sd/" ml={5}>
+            <Link href="http://access.noqod.com.sd/">
               Noqod Admin <ExternalLinkIcon mx="2px" />
             </Link>
           </ListItem>
           <ListItem>
             <Meta>Platform</Meta>
-            <span style={{ marginLeft: "8px" }}>Web</span>
+            <span>Web</span>
           </ListItem>
           <ListItem>
             <Meta>Stack</Meta>
-            <span style={{ marginLeft: "34px" }}>React JS</span>
+            <span>React JS</span>
           </ListItem>
         </List>
       </Container>
@@ -56,15 +56,15 @@ const Work = () => {
         <List ml={4} my={4}>
           <ListItem>
             <Meta>Website</Meta>
-            <span style={{ marginLeft: "20px" }}>NA</span>
+            <span>NA</span>
           </ListItem>
           <ListItem>
             <Meta>Platform</Meta>
-            <span style={{ marginLeft: "8px" }}>Node</span>
+            <spa>Node</spa>
           </ListItem>
           <ListItem>
             <Meta>Stack</Meta>
-            <span style={{ marginLeft: "34px" }}>Fastify</span>
+            <span>Fastify</span>
           </ListItem>
         </List>
       </Container>
@@ -80,17 +80,17 @@ const Work = () => {
         <List ml={4} my={4}>
           <ListItem>
             <Meta>Website</Meta>
-            <Link href="http://npg.noqod.com.sd/" ml={5}>
+            <Link href="http://npg.noqod.com.sd/">
               Noqod Merchant <ExternalLinkIcon mx="2px" />
             </Link>
           </ListItem>
           <ListItem>
             <Meta>Platform</Meta>
-            <span style={{ marginLeft: "8px" }}>Web</span>
+            <span>Web</span>
           </ListItem>
           <ListItem>
             <Meta>Stack</Meta>
-            <span style={{ marginLeft: "34px" }}>React JS</span>
+            <span>React JS</span>
           </ListItem>
         </List>
       </Container>
