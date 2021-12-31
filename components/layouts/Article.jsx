@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import Head from "next/head"
+// import Head from "next/head"
 import { GridItemStyle } from "../GridItem"
 
 const variants = {
@@ -8,7 +8,7 @@ const variants = {
   exit: { opacity: 0, x: 0, y: 20 }
 }
 
-const Article = ({ children, title }) => (
+const Article = ({ children, _ }) => (
   <motion.article
     initial="hidden"
     animate="enter"
@@ -20,11 +20,11 @@ const Article = ({ children, title }) => (
     }}
   >
     <>
-      {title && (
+      {/* {title && (
         <Head>
           <title>{title} - Mounis Bhat</title>
         </Head>
-      )}
+      )} */}
       {children}
       <GridItemStyle />
     </>

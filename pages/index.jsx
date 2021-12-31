@@ -74,7 +74,11 @@ const index = () => {
             I'm a Full-stack Developer based in Kashmir, currently working at{" "}
             {<Link href="https://www.noqod.com.sd/">Noqod.</Link>} I have a
             passion for designing elegant user experience and writing clean and
-            efficient code.
+            efficient code.{<br />} I primarily code in JavaScript and I am
+            proficient in React, Node.js, Fastify, Postgress and Firebase. Other
+            technologies I use are Dart, Python and C#.{<br />} In addition to
+            that, I am a Digital Artist and I love to create art and
+            illustrations.
           </Paragraph>
           <Box align="center" my={4}>
             <NextLink href="works">
@@ -94,10 +98,16 @@ const index = () => {
           </BioSection>
           <BioSection>
             <BioYear>20**</BioYear>
+            Worked as a Freelance designer at{" "}
+            <Link href="https://www.fiverr.com/mounis_?up_rollout=true">
+              Fiverr{" "}
+            </Link>
+          </BioSection>
+          <BioSection>
+            <BioYear>20**</BioYear>
             Graduated from{" "}
             <Link href="https://www.cuchd.in/">Chandigarh University </Link>
           </BioSection>
-
           <BioSection>
             <BioYear>20**</BioYear>
             Working full-time at{" "}
@@ -158,6 +168,13 @@ const index = () => {
               </Link>
             </ListItem>
           </List>
+          <Box align="center" my={4}>
+            <NextLink href="posts">
+              <Button rightIcon={<ChevronRightIcon />} colorScheme="teal">
+                My Posts
+              </Button>
+            </NextLink>
+          </Box>
         </Section>
         <Section delay={0.4}>
           <Heading as="h3" variant="section-title">
