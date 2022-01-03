@@ -99,9 +99,7 @@ const index = () => {
           <BioSection>
             <BioYear>20**</BioYear>
             Worked as a Freelance designer at{" "}
-            <Link href="https://www.fiverr.com/mounis_?up_rollout=true">
-              Fiverr{" "}
-            </Link>
+            <Link href="https://www.fiverr.com/mounis_">Fiverr </Link>
           </BioSection>
           <BioSection>
             <BioYear>20**</BioYear>
