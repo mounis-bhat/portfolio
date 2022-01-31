@@ -109,6 +109,11 @@ const index = () => {
           <BioSection>
             <BioYear>20**</BioYear>
             Working full-time at{" "}
+            {<Link href="https://www.kashmirbox.com/">Kashmir Box.</Link>}
+          </BioSection>
+          <BioSection>
+            <BioYear>20**</BioYear>
+            Working full-time at{" "}
             {<Link href="https://www.noqod.com.sd/">Noqod.</Link>}
           </BioSection>
         </Section>
