@@ -6,8 +6,7 @@ import {
   ListItem,
   Button,
   Icon,
-  Divider,
-  useColorModeValue
+  Divider
 } from "@chakra-ui/react"
 import { IoLogoVercel } from "react-icons/io5"
 
@@ -38,7 +37,7 @@ const Works = () => {
                 leftIcon={<Icon as={IoLogoVercel} />}
                 fontSize="20px"
               >
-                Failed to load SWC binary, Next JS
+                Failed to load SWC binary!
               </Button>
             </NextLink>
           </ListItem>

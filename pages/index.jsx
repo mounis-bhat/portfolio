@@ -75,9 +75,9 @@ const index = () => {
             {<Link href="https://www.noqod.com.sd/">Noqod.</Link>} I have a
             passion for designing elegant user experience and writing clean and
             efficient code.{<br />} I primarily code in JavaScript and I am
-            proficient in React, Node.js, Fastify, Postgress and Firebase. Other
-            technologies I use are Dart, Python and C#.{<br />} In addition to
-            that, I am a Digital Artist and I love to create art and
+            proficient in React, Node.js, Fastify, PostgresSQL and Firebase.
+            Other technologies I use are Dart, Python and C#.{<br />} In
+            addition to that, I am a Digital Artist and I love to create art and
             illustrations.
           </Paragraph>
           <Box align="center" my={4}>

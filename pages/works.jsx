@@ -31,7 +31,7 @@ const Works = () => {
           <Section delay={0.1}>
             <WorkGridItem id="noqod" title="Noqod" thumbnail={thumbnailNoqod}>
               Noqod is a service provider instituted with an impetus of
-              revolutionalising digital payment process in MENA
+              revolutionizing digital payment process in MENA
             </WorkGridItem>
           </Section>
           <Section delay={0.2}>

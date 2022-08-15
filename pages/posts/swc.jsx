@@ -1,10 +1,6 @@
 import { Container, Badge, Link, List, ListItem, Box } from "@chakra-ui/react"
 import { ExternalLinkIcon } from "@chakra-ui/icons"
-import {
-  Title,
-  // WorkImage,
-  Meta
-} from "../../components/Work"
+import { Title, Meta } from "../../components/Work"
 import Paragraph from "../../components/Paragraph"
 import Article from "../../components/layouts/Article"
 
@@ -25,8 +21,8 @@ const Work = () => {
           {`{"presets": ["next/babel"],}`}
           {<br />}
           This will set babel as your default compiler. To avoid using babel
-          compiler in your prodcution build, git ignore .babelrc and let vercel
-          deploy a prodcution build with rust compiler.
+          compiler in your production build, git ignore .babelrc and let vercel
+          deploy a production build with rust compiler.
         </Paragraph>
         <List my={4}>
           <ListItem>
