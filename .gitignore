@@ -6,10 +6,3 @@ node_modules
 
 # Environment
 .env
-
-# Lockfile
-yarn.lock
-package-lock.json
-
-#Babel Config
-.babelrc
