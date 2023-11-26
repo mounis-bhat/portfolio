@@ -16,8 +16,9 @@ const Work = () => {
         <Paragraph>
           Every time you try to run your project locally, Next.js will throw an
           error. This is a known issue with Next.js 12, it uses a rust compiler
-          to load SWC binaries and it's failing, to avoid this create a .babelrc
-          file in your root directory and use the following script: {<br />}
+          to load SWC binaries and it is failing, to avoid this create a
+          .babelrc file in your root directory and use the following script:{" "}
+          {<br />}
           {`{"presets": ["next/babel"],}`}
           {<br />}
           This will set babel as your default compiler. To avoid using babel

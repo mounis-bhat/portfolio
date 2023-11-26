@@ -24,7 +24,7 @@ import Paragraph from "../components/Paragraph"
 import Article from "../components/layouts/Article"
 import { BioSection, BioYear } from "../components/Bio"
 
-const index = () => {
+const Index = () => {
   return (
     <Article>
       <Container>
@@ -36,7 +36,7 @@ const index = () => {
           mt={6}
           align="center"
         >
-          Hey there! I'm a software engineer working in the web industry.
+          Hey there! I&apos;m a software engineer working in the web industry.
         </Box>
 
         <Box
@@ -71,8 +71,8 @@ const index = () => {
             Work
           </Heading>
           <Paragraph>
-            I'm a Full-stack Developer based in Kashmir, currently working at{" "}
-            {<Link href="https://www.noqod.com.sd/">Noqod.</Link>} I have a
+            I&apos;m a Full-stack Developer based in Kashmir, currently working
+            at {<Link href="https://www.noqod.com.sd/">Noqod.</Link>} I have a
             passion for designing elegant user experience and writing clean and
             efficient code.{<br />} I primarily code in JavaScript and I am
             proficient in React, Node.js, Fastify, PostgresSQL and Firebase.
@@ -187,4 +187,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index

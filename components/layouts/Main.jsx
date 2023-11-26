@@ -1,9 +1,22 @@
 import Head from "next/head"
-import { Box, Container } from "@chakra-ui/react"
+import { Box, Container, useToast } from "@chakra-ui/react"
+import { useEffect } from "react"
 
 import Navbar from "../Navbar"
 
 const Main = ({ children, router }) => {
+  const toast = useToast()
+
+  useEffect(() => {
+    toast({
+      title: "This website was developed in 2021",
+      description: "It is outdated, the information is no longer accurate.",
+      status: "warning",
+      duration: 3000,
+      isClosable: true,
+      position: "top"
+    })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Box as="main" pb={8}>
       <Head>
