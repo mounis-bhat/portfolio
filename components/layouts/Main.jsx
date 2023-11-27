@@ -12,7 +12,7 @@ const Main = ({ children, router }) => {
       title: "This website was developed in 2021",
       description: "It is outdated, the information is no longer accurate.",
       status: "warning",
-      duration: 3000,
+      duration: 5000,
       isClosable: true,
       position: "top"
     })
