@@ -13,16 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Node.js with pnpm cache
+    - name: Setup Node.js and pnpm
       uses: actions/setup-node@v3
       with:
         node-version: '20'
         cache: 'pnpm'
-
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 8
+        package-manager: 'pnpm'
 
     - name: Install dependencies
       run: pnpm install --no-frozen-lockfile
@@ -30,7 +26,7 @@ jobs:
     - name: Build and export static site
       run: pnpm run build && pnpm run export
 
-    - name: 🚀 Deploy to Droplet
+    - name: Deploy to Droplet
       uses: appleboy/scp-action@v0.1.4
       with:
         host: ${{ secrets.HOST }}
