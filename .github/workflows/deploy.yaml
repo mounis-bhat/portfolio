@@ -1,4 +1,4 @@
-name: Deploy Next.js Portfolio
+name: Deploy Astro Portfolio
 
 on:
   push:
@@ -11,18 +11,16 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
 
     - name: Install dependencies
-      run: npm install --legacy-peer-deps
+      run: bun install --frozen-lockfile
 
-    - name: Build and export static site
-      run: npm run build && npm run export
+    - name: Build static site
+      run: bun run build
 
     - name: Deploy to Droplet
       uses: appleboy/scp-action@v0.1.4
@@ -31,6 +29,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
-        source: "out/*"
+        source: "dist/*"
         target: "/var/www/mounis.net"
         strip_components: 1

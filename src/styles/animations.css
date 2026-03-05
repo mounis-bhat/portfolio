@@ -1,0 +1,150 @@
+/* ============================================================
+   ANIMATIONS — View Transition API + scroll reveals + hero entrance
+   ============================================================ */
+
+/* ── View Transition keyframes ── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── View Transition routing animations ── */
+::view-transition-old(root) {
+  animation: 180ms var(--ease-in-out) both slide-down;
+}
+
+::view-transition-new(root) {
+  animation: 320ms var(--ease-out) 40ms both slide-up;
+}
+
+::view-transition-old(page-title) {
+  animation: 150ms var(--ease-in-out) both fade-out;
+}
+
+::view-transition-new(page-title) {
+  animation: 260ms var(--ease-out) 60ms both fade-in;
+}
+
+::view-transition-old(project-image),
+::view-transition-new(project-image) {
+  animation-duration: 320ms;
+}
+
+/* Navbar — captured in its own group via view-transition-name: site-nav.
+   No animation: it stays fixed and visually static during every transition. */
+::view-transition-old(site-nav),
+::view-transition-new(site-nav) {
+  animation: none;
+}
+
+
+/* ============================================================
+   HERO ENTRANCE — staggered CSS animation, fires on load
+   Used for above-fold elements on the homepage.
+   ============================================================ */
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  opacity: 0;
+  animation: hero-enter 0.9s var(--ease-out) forwards;
+}
+
+.hero-enter-1 { animation-delay: 60ms; }
+.hero-enter-2 { animation-delay: 200ms; }
+.hero-enter-3 { animation-delay: 320ms; }
+.hero-enter-4 { animation-delay: 420ms; }
+.hero-enter-5 { animation-delay: 500ms; }
+
+
+/* ============================================================
+   SCROLL REVEAL — IntersectionObserver adds .in-view
+   Elements start hidden; JS triggers the transition.
+   Falls back to visible if JS is unavailable.
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity  0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delays — applies to a group of siblings observed together */
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+
+/* ============================================================
+   SECTION TITLE BAR — grows from 0 when title enters viewport
+   Overrides the static width set in typography.css.
+   ============================================================ */
+
+.section-title::after {
+  width: 0;
+  transition: width 0.55s var(--ease-out) 0.18s;
+}
+
+.section-title.in-view::after {
+  width: 2.5rem;
+}
+
+
+/* ============================================================
+   REDUCED MOTION — disable everything
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  .hero-enter {
+    opacity: 1;
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .section-title::after {
+    width: 2.5rem;
+    transition: none;
+  }
+}

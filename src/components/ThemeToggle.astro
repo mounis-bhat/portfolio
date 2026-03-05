@@ -1,0 +1,114 @@
+---
+// No frontmatter needed
+---
+
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  aria-label="Toggle color theme"
+  title="Toggle color theme"
+>
+  <!--
+    Moon: visible in LIGHT mode — click to go dark.
+    Sun:  visible in DARK mode  — click to go light.
+    Only one is ever visible at a time (controlled via :global CSS below).
+  -->
+  <span class="icon icon-moon" aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+    </svg>
+  </span>
+  <span class="icon icon-sun" aria-hidden="true">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  </span>
+</button>
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+    background-color: var(--bg-surface);
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /*
+    Icon visibility MUST use :global() so the [data-theme] selector on <html>
+    can reach the scoped .icon-* elements inside this component.
+    Without :global(), Astro's scoped CSS transforms the selector incorrectly.
+  */
+
+  /* Light mode → hide sun, show moon */
+  :global([data-theme="light"]) .icon-sun,
+  :global(:root:not([data-theme="dark"])) .icon-sun {
+    display: none;
+  }
+
+  /* Dark mode → hide moon, show sun */
+  :global([data-theme="dark"]) .icon-moon {
+    display: none;
+  }
+</style>
+
+<script>
+  /*
+    The <Nav> has transition:persist, so the toggle button survives every
+    client-side navigation. We must only attach the click listener ONCE —
+    calling addEventListener again on the same element after each navigation
+    would stack up duplicate handlers (causing two toggles per click = no-op).
+
+    Fix: mark the element with data-bound so we skip re-binding.
+  */
+  function bindThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn || btn.hasAttribute('data-bound')) return;
+
+    btn.setAttribute('data-bound', '');
+    btn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') ?? 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  }
+
+  // Runs on first page load
+  bindThemeToggle();
+
+  // astro:after-swap fires after every navigation — the guard above ensures
+  // we only bind once even though this callback fires multiple times.
+  document.addEventListener('astro:after-swap', bindThemeToggle);
+</script>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articles and writing by Mounis Bhat — coming soon."
+>
+  <main class="page" id="main-content" transition:animate="fade">
+    <div class="container">
+
+      <header class="page-header section reveal">
+        <span class="section-label">Writing</span>
+        <h1 class="section-title" transition:name="page-title">Blog</h1>
+      </header>
+
+      <div class="coming-soon reveal reveal-delay-1">
+        <div class="coming-soon__icon" aria-hidden="true">✦</div>
+        <p class="coming-soon__title">Nothing here yet.</p>
+        <p class="coming-soon__sub">
+          Planning to write about frontend architecture, Go, developer tooling,
+          and the occasional CSS deep-dive.<br /><br />
+          Follow me on <a href="https://twitter.com/mounis_" target="_blank" rel="noopener noreferrer">
+            Twitter
+          </a> to be notified when I do.
+        </p>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>

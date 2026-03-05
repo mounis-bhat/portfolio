@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { experience, education, certifications } from '../data/experience';
+---
+
+<BaseLayout
+  title="Experience"
+  description="Work history, education, and certifications of Mounis Bhat — Senior Software Engineer."
+>
+  <main class="page" id="main-content" transition:animate="fade">
+    <div class="container">
+
+      <header class="page-header section reveal">
+        <span class="section-label">Career</span>
+        <h1 class="section-title" transition:name="page-title">Experience</h1>
+      </header>
+
+      <!-- Work History -->
+      <section class="section reveal reveal-delay-1">
+        <h2 class="section-title">Work</h2>
+        <div class="exp-list">
+          {
+            experience.map((job) => (
+              <article class="exp-item">
+                <div class="exp-item__period">
+                  <span class="exp-item__dates">{job.period}</span>
+                  <span class="exp-item__duration">{job.duration}</span>
+                </div>
+                <div class="exp-item__content">
+                  <h3 class="exp-item__title">{job.role}</h3>
+                  <p class="exp-item__company">
+                    {job.companyUrl ? (
+                      <a href={job.companyUrl} target="_blank" rel="noopener noreferrer" class="exp-item__company-link">
+                        {job.company}
+                      </a>
+                    ) : (
+                      job.company
+                    )}
+                    <span class="exp-item__location"> · {job.location}</span>
+                  </p>
+                  <p class="exp-item__desc">{job.description}</p>
+                  {job.skills && job.skills.length > 0 && (
+                    <div class="exp-item__skills">
+                      {job.skills.map((skill) => (
+                        <span class="skill-chip">{skill}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Education -->
+      <section class="section reveal reveal-delay-2">
+        <h2 class="section-title">Education</h2>
+        <div class="exp-list">
+          {
+            education.map((edu) => (
+              <article class="exp-item">
+                <div class="exp-item__period">
+                  <span class="exp-item__dates">{edu.period}</span>
+                </div>
+                <div class="exp-item__content">
+                  <h3 class="exp-item__title">{edu.degree}</h3>
+                  <p class="exp-item__company">{edu.institution}</p>
+                  {edu.description && (
+                    <p class="exp-item__desc">{edu.description}</p>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- Certifications -->
+      <section class="section reveal reveal-delay-3">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certs-grid">
+          {
+            certifications.map((cert) => (
+              <div class="cert-item">
+                <div class="cert-item__issuer">{cert.issuer}</div>
+                <p class="cert-item__name">{cert.name}</p>
+                <span class="cert-item__date">{cert.date}</span>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ── Experience list ── */
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: var(--space-8);
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .exp-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-item__period {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: 0.25em;
+  }
+
+  .exp-item__dates {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+  }
+
+  .exp-item__duration {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+  }
+
+  .exp-item__title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+
+  .exp-item__company {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+    line-height: 1.4;
+  }
+
+  .exp-item__company-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .exp-item__company-link:hover {
+    border-color: var(--accent);
+  }
+
+  .exp-item__location {
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+
+  .exp-item__desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 58ch;
+  }
+
+  .exp-item__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  /* ── Certifications grid ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .cert-item {
+    padding: var(--space-5);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+
+  .cert-item:hover {
+    border-color: var(--border-strong);
+  }
+
+  .cert-item__issuer {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-2);
+  }
+
+  .cert-item__name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: var(--space-3);
+  }
+
+  .cert-item__date {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+  }
+
+  /* Mobile: stack the grid */
+  @media (max-width: 600px) {
+    .exp-item {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    .exp-item__period {
+      flex-direction: row;
+      gap: var(--space-4);
+      align-items: center;
+    }
+  }
+</style>

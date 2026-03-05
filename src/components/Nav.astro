@@ -1,0 +1,323 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navLinks = [
+  { href: '/works',      label: 'Works' },
+  { href: '/experience', label: 'Experience' },
+  { href: '/blog',       label: 'Blog' },
+  { href: '/uses',       label: 'Uses' },
+];
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="nav">
+  <div class="nav__inner container">
+    <a href="/" class="nav__logo" aria-label="Home — Mounis Bhat">
+      <img src="/images/m.svg"      class="logo logo--light" alt="" aria-hidden="true" width="24" height="30" />
+      <img src="/images/m-dark.svg" class="logo logo--dark"  alt="" aria-hidden="true" width="24" height="30" />
+    </a>
+
+    <nav class="nav__links" aria-label="Main navigation">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={`nav__link${isActive(link.href) ? ' nav__link--active' : ''}`}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <ThemeToggle />
+
+    <button
+      class="nav__hamburger"
+      id="nav-hamburger"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-drawer"
+    >
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile drawer — sits below the fixed header -->
+<div class="nav__drawer" id="nav-drawer" aria-hidden="true">
+  <nav class="drawer__nav container" aria-label="Mobile navigation">
+    {
+      navLinks.map((link) => (
+        <a
+          href={link.href}
+          class={`drawer__link${isActive(link.href) ? ' drawer__link--active' : ''}`}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(var(--nav-blur));
+    -webkit-backdrop-filter: blur(var(--nav-blur));
+    border-bottom: 1px solid var(--border);
+    view-transition-name: site-nav;
+  }
+
+  .nav__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: auto;
+    opacity: 1;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .nav__logo:hover {
+    opacity: 0.7;
+  }
+
+  .logo {
+    display: block;
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  :global([data-theme="dark"])  .logo--light { display: none; }
+  :global([data-theme="light"]) .logo--dark  { display: none; }
+  :global(:root:not([data-theme])) .logo--dark { display: none; }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .nav__link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    position: relative;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: var(--space-3);
+    right: var(--space-3);
+    height: 1.5px;
+    background-color: var(--accent);
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .nav__link:hover {
+    color: var(--text);
+    background-color: var(--bg-surface);
+  }
+
+  .nav__link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .nav__link--active {
+    color: var(--accent);
+    background-color: var(--accent-dim);
+  }
+
+  .nav__link--active::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Hamburger button ── */
+  .nav__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0;
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+
+  .nav__hamburger:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+
+  .hamburger__line {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background-color: currentColor;
+    border-radius: 1px;
+    transition:
+      transform 220ms var(--ease-out),
+      opacity 220ms var(--ease-out);
+  }
+
+  /* Animate to × when open */
+  .nav__hamburger[aria-expanded="true"] .hamburger__line:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav__hamburger[aria-expanded="true"] .hamburger__line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav__hamburger[aria-expanded="true"] .hamburger__line:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* ── Mobile drawer ── */
+  .nav__drawer {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(var(--nav-blur));
+    -webkit-backdrop-filter: blur(var(--nav-blur));
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(-6px);
+    visibility: hidden;
+    transition:
+      opacity 200ms var(--ease-out),
+      transform 200ms var(--ease-out),
+      visibility 0ms 200ms;
+    /* Only render on mobile */
+    display: none;
+  }
+
+  .nav__drawer.open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition:
+      opacity 200ms var(--ease-out),
+      transform 200ms var(--ease-out),
+      visibility 0ms 0ms;
+  }
+
+  .drawer__nav {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--space-3);
+  }
+
+  .drawer__link {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--border);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .drawer__link:last-child {
+    border-bottom: none;
+  }
+
+  .drawer__link:hover {
+    color: var(--text);
+  }
+
+  .drawer__link--active {
+    color: var(--accent);
+  }
+
+  /* ── Mobile breakpoint ── */
+  @media (max-width: 520px) {
+    .nav__links {
+      display: none;
+    }
+
+    .nav__hamburger {
+      display: flex;
+    }
+
+    .nav__drawer {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  function bindHamburger() {
+    const btn = document.getElementById('nav-hamburger');
+    const drawer = document.getElementById('nav-drawer');
+    if (!btn || !drawer || btn.hasAttribute('data-bound')) return;
+    btn.setAttribute('data-bound', '');
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      drawer.classList.toggle('open', !isOpen);
+      drawer.setAttribute('aria-hidden', String(isOpen));
+    });
+  }
+
+  function closeDrawer() {
+    const btn = document.getElementById('nav-hamburger');
+    const drawer = document.getElementById('nav-drawer');
+    if (!btn || !drawer) return;
+    btn.setAttribute('aria-expanded', 'false');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    // Re-bind after navigation (nav is persisted, so data-bound survives)
+    btn.removeAttribute('data-bound');
+    bindHamburger();
+  }
+
+  bindHamburger();
+  document.addEventListener('astro:after-swap', closeDrawer);
+</script>

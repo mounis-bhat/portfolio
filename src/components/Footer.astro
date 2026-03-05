@@ -1,0 +1,71 @@
+---
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'GitHub',   href: 'https://github.com/mounis-bhat' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/mounis-bhat' },
+  { label: 'Twitter',  href: 'https://twitter.com/mounis_' },
+];
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <p class="footer__copy">
+      © {year} Mounis Bhat — Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+    </p>
+    <div class="footer__links">
+      {
+        links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer" class="footer__link">
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-8);
+  }
+
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .footer__copy {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+  }
+
+  .footer__copy a {
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+
+  .footer__copy a:hover {
+    color: var(--text-muted);
+  }
+
+  .footer__links {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .footer__link {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .footer__link:hover {
+    color: var(--text-muted);
+  }
+</style>

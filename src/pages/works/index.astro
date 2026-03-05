@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('works');
+const projects = allProjects.sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+---
+
+<BaseLayout
+  title="Works"
+  description="Projects and open-source work by Mounis Bhat — Go CLI tools, Svelte apps, React dashboards, and CSS experiments."
+>
+  <main class="page" id="main-content" transition:animate="fade">
+    <div class="container">
+
+      <header class="page-header section reveal">
+        <span class="section-label">Portfolio</span>
+        <h1 class="section-title" transition:name="page-title">Works</h1>
+        <p class="page-header__sub">
+          A selection of projects — professional, open-source, and built for the love of it.
+        </p>
+      </header>
+
+      <div class="projects-grid">
+        {projects.map((project, i) => (
+          <div class={`reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: var(--space-5);
+  }
+
+  .projects-grid > div {
+    display: contents;
+  }
+</style>

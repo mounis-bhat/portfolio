@@ -1,0 +1,140 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Mounis Bhat — Senior Software Engineer. Front-end developer passionate about elegant user experiences and clean code.',
+  ogImage = '/images/og-default.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageTitle = title === 'Home' ? 'Mounis Bhat' : `${title} · Mounis Bhat`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Anti-flash theme init.
+      MUST be the very first script — runs before any CSS is applied.
+      Only handles the initial full page load; View Transition navigations
+      are covered by the module script below.
+    -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <!--
+      Restore theme after every client-side navigation.
+      Astro's ClientRouter merges the incoming <html> attributes during the DOM
+      swap — because the new page's <html> has no data-theme (it's always set
+      client-side), the attribute is wiped, reverting every navigation to light.
+      This module script (runs once) re-applies the stored theme after each swap.
+    -->
+    <script>
+      function applyTheme() {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute(
+          'data-theme',
+          stored || (prefersDark ? 'dark' : 'light')
+        );
+      }
+      document.addEventListener('astro:after-swap', applyTheme);
+    </script>
+
+    <!-- Fonts: Bricolage Grotesque (display) · Instrument Sans (body) · Geist Mono (code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500&family=Instrument+Sans:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Core meta -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@mounis_" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- View Transitions -->
+    <ClientRouter />
+
+    <!--
+      Scroll reveal — IntersectionObserver adds .in-view to:
+        · .reveal elements (opacity/transform transition in animations.css)
+        · .section-title elements (bar width grows in animations.css)
+      Module script runs once; re-observes after each View Transition swap.
+    -->
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
+      );
+
+      function observeAll() {
+        document
+          .querySelectorAll('.reveal:not(.in-view), .section-title:not(.in-view)')
+          .forEach((el) => io.observe(el));
+      }
+
+      observeAll();
+      document.addEventListener('astro:after-swap', observeAll);
+    </script>
+  </head>
+
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <Nav transition:persist />
+
+    <slot />
+
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+  @import '../styles/typography.css';
+  @import '../styles/components.css';
+  @import '../styles/animations.css';
+</style>

@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, getEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getCollection('works');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+};
+
+const { project } = Astro.props;
+const { data, slug } = project;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <main class="page" id="main-content" transition:animate="fade">
+
+    {
+      data.image && (
+        <div class="project-hero">
+          <img
+            src={data.image}
+            alt={data.title}
+            transition:name={`project-image-${slug}`}
+          />
+        </div>
+      )
+    }
+
+    <div class="container">
+
+      <div class="project-meta">
+        <a href="/works" class="back-link">← Back to Works</a>
+        {data.year && <span class="project-meta__year">{data.year}</span>}
+      </div>
+
+      <h1 class="project-title reveal" transition:name={`project-title-${slug}`}>
+        {data.title}
+      </h1>
+
+      {
+        data.tags && data.tags.length > 0 && (
+          <div class="project-tags reveal reveal-delay-1">
+            {data.tags.map((tag) => (
+              <span class="project-tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        (data.github || data.url) && (
+          <div class="project-links reveal reveal-delay-2">
+            {data.github && (
+              <a href={data.github} target="_blank" rel="noopener noreferrer" class="btn-outline">
+                GitHub →
+              </a>
+            )}
+            {data.url && (
+              <a href={data.url} target="_blank" rel="noopener noreferrer" class="btn-outline">
+                Live Site →
+              </a>
+            )}
+          </div>
+        )
+      }
+
+      <div class="prose reveal reveal-delay-3">
+        <Content />
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .project-hero {
+    height: 40vh;
+    min-height: 240px;
+    max-height: 440px;
+    overflow: hidden;
+    margin-bottom: var(--space-10);
+  }
+
+  .project-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  .project-meta__year {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-2xl), 5vw, var(--text-3xl));
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .project-tag {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    background-color: var(--tag-bg);
+    color: var(--text-muted);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+  }
+
+  .project-links {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-12);
+  }
+</style>

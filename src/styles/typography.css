@@ -1,0 +1,151 @@
+/* ============================================================
+   TYPOGRAPHY — Scale, headings, prose, section labels
+   ============================================================
+   Fonts loaded via Google Fonts in BaseLayout.astro:
+   · Bricolage Grotesque (display sans) — opsz 12..96, wght 300 400 500
+   · Instrument Sans (body) — wght 400 500 600
+   · Geist Mono (code) — wght 400
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+
+/* Large hero heading */
+.display {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 6vw, var(--text-4xl));
+  font-weight: 300;
+  font-optical-sizing: auto;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+/* Small uppercase label above section titles */
+.section-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: var(--space-3);
+}
+
+/* Section heading with teal underline bar */
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  position: relative;
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 1px;
+}
+
+/* Page header used across secondary pages */
+.page-header {
+  padding-bottom: var(--space-8);
+}
+
+.page-header__sub {
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+/* Code */
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+code {
+  background-color: var(--code-bg);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+pre {
+  background-color: var(--code-bg);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Paragraph spacing */
+p + p {
+  margin-top: var(--space-4);
+}
+
+/* Prose — for rendered markdown content */
+.prose {
+  max-width: 65ch;
+  color: var(--text-muted);
+}
+
+.prose h2 {
+  font-size: var(--text-xl);
+  color: var(--text);
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
+}
+
+.prose h3 {
+  font-size: var(--text-lg);
+  color: var(--text);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+.prose p {
+  margin-bottom: var(--space-4);
+  line-height: 1.8;
+}
+
+.prose ul, .prose ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.prose li {
+  margin-bottom: var(--space-2);
+  line-height: 1.7;
+}
+
+.prose a {
+  font-weight: 500;
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
+}

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { uses } from '../data/uses';
+---
+
+<BaseLayout
+  title="Uses"
+  description="The tools, stack, and setup Mounis Bhat uses daily as a Senior Software Engineer."
+>
+  <main class="page" id="main-content" transition:animate="fade">
+    <div class="container">
+
+      <header class="page-header section reveal">
+        <span class="section-label">Setup</span>
+        <h1 class="section-title" transition:name="page-title">Uses</h1>
+        <p class="page-header__sub">
+          Things I use every day. Inspired by{' '}
+          <a href="https://uses.tech" target="_blank" rel="noopener noreferrer">uses.tech</a>.
+        </p>
+      </header>
+
+      {
+        uses.map((category, i) => (
+          <section class={`uses-section section reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <h2 class="uses-section__title">{category.title}</h2>
+            <div class="uses-list">
+              {category.items.map((item) => (
+                <div class="uses-item">
+                  <div class="uses-item__header">
+                    {item.url ? (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="uses-item__name-link"
+                      >
+                        {item.name} <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      <strong class="uses-item__name">{item.name}</strong>
+                    )}
+                  </div>
+                  {item.description && (
+                    <p class="uses-item__desc">{item.description}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .uses-section__title {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: var(--space-4);
+  }
+
+  .uses-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .uses-item {
+    padding-block: var(--space-5);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .uses-item__header {
+    margin-bottom: var(--space-2);
+  }
+
+  .uses-item__name {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .uses-item__name-link {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .uses-item__name-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .uses-item__desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    max-width: 55ch;
+    line-height: 1.7;
+  }
+</style>

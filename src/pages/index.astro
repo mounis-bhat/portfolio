@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import SkillTag from '../components/SkillTag.astro';
+import { skills } from '../data/skills';
+
+const bio = [
+  {
+    year: '2020',
+    text: 'Graduated with a B.E. in Computer Science from Chandigarh University.',
+  },
+  {
+    year: '2020',
+    text: 'Started career as a Frontend Engineer at Kashmir Box, Srinagar — building e-commerce interfaces with HTML, CSS, and JavaScript.',
+  },
+  {
+    year: '2021',
+    text: 'Joined NOQOD as a Frontend Engineer, building fintech applications — merchant portal, admin dashboard — with React and a Fastify backend.',
+  },
+  {
+    year: '2022',
+    text: 'Moved to The Digital London / Aseef IT Holding as a React Developer. Went deep on TypeScript and Next.js.',
+  },
+  {
+    year: '2023',
+    text: 'Joined Imobisoft as a Senior Software Engineer, working remotely from Srinagar for a UK-based team.',
+  },
+  {
+    year: 'Now',
+    text: 'Building scalable frontends at Imobisoft, exploring Go and CLI tooling on the side, and occasionally writing CSS for fun.',
+  },
+];
+---
+
+<BaseLayout
+  title="Home"
+  description="Mounis Bhat — Senior Software Engineer and front-end developer. Passionate about elegant user experiences and clean, efficient code."
+>
+  <main class="page" id="main-content" transition:animate="fade">
+    <div class="container">
+
+      <!-- ── Hero (above fold — uses hero-enter CSS animation, not scroll reveal) ── -->
+      <section class="hero section">
+        <div class="hero__content">
+          <div class="hero__text">
+            <h1 class="display hero-enter hero-enter-1" transition:name="page-title">
+              Mounis<br />Bhat
+            </h1>
+            <p class="hero__role hero-enter hero-enter-2">
+              Senior Software Engineer
+              <span class="hero__sep">·</span>
+              <a
+                href="https://imobisoft.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hero__company"
+              >
+                Imobisoft
+              </a>
+            </p>
+            <p class="hero__location hero-enter hero-enter-3">
+              Srinagar, J&amp;K, India — Remote
+            </p>
+          </div>
+
+          <div class="hero__photo hero-enter hero-enter-4">
+            <img
+              src="/images/mounis.jpg"
+              alt="Mounis Bhat"
+              width="280"
+              height="280"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ── About ── -->
+      <section class="section reveal">
+        <span class="section-label">About</span>
+        <h2 class="section-title">Who I am</h2>
+        <div class="about__body">
+          <p>
+            A front-end UI developer with a passion for designing elegant user experiences
+            and writing clean, efficient code. I've spent the last four years building
+            fintech dashboards, customer-facing React apps, and internal tooling for
+            teams across India and the UK.
+          </p>
+          <p>
+            At <a href="https://imobisoft.co.uk" target="_blank" rel="noopener">Imobisoft</a> I work
+            across the full frontend stack — from design system decisions to optimising React
+            performance and shipping accessible, production-ready components.
+            When I'm not writing TypeScript, I'm usually writing Go.
+          </p>
+          <div class="about__ctas">
+            <a href="/works" class="btn-outline">See my projects →</a>
+            <a href="/experience" class="about__link">Full experience →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Bio Timeline ── -->
+      <section class="section reveal">
+        <span class="section-label">Timeline</span>
+        <h2 class="section-title">Bio</h2>
+        <div class="timeline">
+          {
+            bio.map((item, i) => (
+              <div class={`timeline__item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+                <span class="timeline__year">{item.year}</span>
+                <p class="timeline__text">{item.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- ── Skills ── -->
+      <section class="section reveal">
+        <span class="section-label">Toolkit</span>
+        <h2 class="section-title">Skills &amp; Tools</h2>
+        <div class="skills__groups">
+          {
+            Object.entries(skills).map(([group, tags]) => (
+              <div class="skills__group reveal">
+                <p class="skills__group-label">{group}</p>
+                <div class="skills__tags">
+                  {tags.map((tag) => (
+                    <SkillTag label={tag} />
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- ── On the Web ── -->
+      <section class="section reveal">
+        <span class="section-label">Find me</span>
+        <h2 class="section-title">On the web</h2>
+        <SocialLinks />
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    padding-top: var(--space-10);
+  }
+
+  .hero__content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-8);
+    margin-top: var(--space-2);
+  }
+
+  .hero__text {
+    flex: 1;
+  }
+
+  .hero__role {
+    font-size: var(--text-md);
+    color: var(--text-muted);
+    margin-top: var(--space-5);
+    line-height: 1.4;
+  }
+
+  .hero__sep {
+    margin-inline: var(--space-2);
+    color: var(--border-strong);
+  }
+
+  .hero__company {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-strong);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .hero__company:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .hero__location {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    margin-top: var(--space-3);
+    letter-spacing: 0.01em;
+  }
+
+  .hero__photo {
+    flex-shrink: 0;
+  }
+
+  .hero__photo img {
+    width: 130px;
+    height: 130px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    object-position: top center;
+    border: 1px solid var(--border);
+    filter: grayscale(10%);
+    transition: filter var(--dur-slow) var(--ease-out);
+  }
+
+  .hero__photo img:hover {
+    filter: grayscale(0%);
+  }
+
+  /* ── About ── */
+  .about__body p {
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+
+  .about__ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+    flex-wrap: wrap;
+  }
+
+  .about__link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .about__link:hover {
+    color: var(--text);
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: var(--space-6);
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .timeline__item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline__year {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.2em;
+    letter-spacing: 0.04em;
+  }
+
+  .timeline__text {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── Skills ── */
+  .skills__groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .skills__group-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: var(--space-3);
+  }
+
+  .skills__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 480px) {
+    .hero__content {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-6);
+      text-align: center;
+    }
+
+    .hero__text {
+      width: 100%;
+    }
+
+    .hero__role {
+      justify-content: center;
+    }
+
+    .hero__photo {
+      align-self: center;
+    }
+
+    .hero__photo img {
+      width: min(60vw, 200px);
+      height: min(60vw, 200px);
+    }
+  }
+</style>

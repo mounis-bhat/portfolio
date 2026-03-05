@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Not Found" description="Page not found.">
+  <main class="page" id="main-content" transition:animate="fade">
+    <div class="container">
+      <div class="not-found reveal">
+        <p class="not-found__code" aria-hidden="true">404</p>
+        <h1 class="not-found__title">Page not found.</h1>
+        <p class="not-found__sub">
+          The page you're looking for doesn't exist or has moved.
+        </p>
+        <a href="/" class="btn-outline">← Go home</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-top: var(--space-20);
+    max-width: 36rem;
+  }
+
+  .not-found__code {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    color: var(--border-strong);
+    line-height: 1;
+    margin-bottom: var(--space-4);
+    user-select: none;
+  }
+
+  .not-found__title {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    margin-bottom: var(--space-4);
+  }
+
+  .not-found__sub {
+    color: var(--text-muted);
+    margin-bottom: var(--space-8);
+    font-size: var(--text-sm);
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+const links = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/mounis-bhat',
+    handle: '@mounis-bhat',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/mounis-bhat',
+    handle: 'in/mounis-bhat',
+  },
+  {
+    label: 'Twitter / X',
+    href: 'https://twitter.com/mounis_',
+    handle: '@mounis_',
+  },
+];
+---
+
+<div class="social-links">
+  {
+    links.map((link) => (
+      <a href={link.href} target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="social-link__label">{link.label}</span>
+        <span class="social-link__handle">{link.handle}</span>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    max-width: 32rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--dur-fast) var(--ease-out);
+    gap: var(--space-4);
+  }
+
+  .social-link:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+  }
+
+  .social-link__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+
+  .social-link__handle {
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .social-link:hover .social-link__handle {
+    color: var(--text-muted);
+  }
+</style>
