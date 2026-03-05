@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
+    "@fontsource-variable/bricolage-grotesque": "^5.2.10",
+    "@fontsource/geist-mono": "^5.2.7",
+    "@fontsource/instrument-sans": "^5.2.8",
     "astro": "^5.17.1"
   }
 }

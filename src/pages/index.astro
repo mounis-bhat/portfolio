@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import SkillTag from '../components/SkillTag.astro';
 import { skills } from '../data/skills';
+import mounisPhoto from '../assets/images/mounis.jpg';
 
 const bio = [
   {
@@ -64,12 +66,13 @@ const bio = [
           </div>
 
           <div class="hero__photo hero-enter hero-enter-4">
-            <img
-              src="/images/mounis.jpg"
+            <Image
+              src={mounisPhoto}
               alt="Mounis Bhat"
-              width="280"
-              height="280"
+              width={280}
+              height={280}
               loading="eager"
+              fetchpriority="high"
             />
           </div>
         </div>

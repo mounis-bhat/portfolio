@@ -3,6 +3,13 @@ import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+// Self-hosted fonts — imported in frontmatter so Vite copies the woff2 files
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/500.css';
+import '@fontsource/instrument-sans/600.css';
+import '@fontsource/geist-mono/400.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -59,13 +66,6 @@ const pageTitle = title === 'Home' ? 'Mounis Bhat' : `${title} · Mounis Bhat`;
       document.addEventListener('astro:after-swap', applyTheme);
     </script>
 
-    <!-- Fonts: Bricolage Grotesque (display) · Instrument Sans (body) · Geist Mono (code) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500&family=Instrument+Sans:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- Core meta -->
     <title>{pageTitle}</title>
