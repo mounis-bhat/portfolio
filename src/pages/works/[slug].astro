@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
+
+interface Props {
+  project: CollectionEntry<'works'>;
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection('works');

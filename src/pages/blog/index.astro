@@ -1,10 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout
   title="Blog"
-  description="Articles and writing by Mounis Bhat — coming soon."
+  description="Articles and writing by Mounis Bhat — frontend architecture, Go, developer tooling, and CSS."
 >
   <main class="page" id="main-content" transition:animate="fade">
     <div class="container">
@@ -12,20 +16,134 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <header class="page-header section reveal">
         <span class="section-label">Writing</span>
         <h1 class="section-title" transition:name="page-title">Blog</h1>
+        <p class="page-header__sub">
+          Thoughts on frontend architecture, Go, developer tooling, and the occasional CSS deep-dive.
+        </p>
       </header>
 
-      <div class="coming-soon reveal reveal-delay-1">
-        <div class="coming-soon__icon" aria-hidden="true">✦</div>
-        <p class="coming-soon__title">Nothing here yet.</p>
-        <p class="coming-soon__sub">
-          Planning to write about frontend architecture, Go, developer tooling,
-          and the occasional CSS deep-dive.<br /><br />
-          Follow me on <a href="https://twitter.com/mounis_" target="_blank" rel="noopener noreferrer">
-            Twitter
-          </a> to be notified when I do.
-        </p>
-      </div>
+      <ol class="post-list">
+        {posts.map((post, i) => {
+          const date = post.data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+          return (
+            <li class={`post-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+              <a href={`/blog/${post.slug}`} class="post-link">
+                <div class="post-link__body">
+                  <span class="post-link__title" transition:name={`post-title-${post.slug}`}>
+                    {post.data.title}
+                  </span>
+                  <p class="post-link__desc">{post.data.description}</p>
+                  {post.data.tags && post.data.tags.length > 0 && (
+                    <div class="post-link__tags">
+                      {post.data.tags.map((tag) => (
+                        <span class="post-tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <time class="post-link__date" datetime={post.data.pubDate.toISOString()}>
+                  {date}
+                </time>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
 
     </div>
   </main>
 </BaseLayout>
+
+<style>
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .post-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .post-link {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-5) 0;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .post-link:hover {
+    opacity: 0.75;
+    color: inherit;
+  }
+
+  .post-link__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .post-link__title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: var(--space-1);
+  }
+
+  .post-link__desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .post-link__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .post-tag {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    background-color: var(--tag-bg);
+    color: var(--text-muted);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+  }
+
+  .post-link__date {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.2em;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 560px) {
+    .post-link {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .post-link__date {
+      padding-top: 0;
+    }
+  }
+</style>
