@@ -30,9 +30,9 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
           });
           return (
             <li class={`post-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-              <a href={`/blog/${post.slug}`} class="post-link">
+              <a href={`/blog/${post.id}`} class="post-link">
                 <div class="post-link__body">
-                  <span class="post-link__title" transition:name={`post-title-${post.slug}`}>
+                  <span class="post-link__title" transition:name={`post-title-${post.id}`}>
                     {post.data.title}
                   </span>
                   <p class="post-link__desc">{post.data.description}</p>

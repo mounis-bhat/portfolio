@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
@@ -11,14 +11,14 @@ interface Props {
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection('works');
   return projects.map((project) => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
     props: { project },
   }));
 };
 
 const { project } = Astro.props;
-const { data, slug } = project;
-const { Content } = await project.render();
+const { data, id } = project;
+const { Content } = await render(project);
 ---
 
 <BaseLayout title={data.title} description={data.description}>
@@ -30,7 +30,7 @@ const { Content } = await project.render();
           <img
             src={data.image}
             alt={data.title}
-            transition:name={`project-image-${slug}`}
+            transition:name={`project-image-${id}`}
           />
         </div>
       )
@@ -43,7 +43,7 @@ const { Content } = await project.render();
         {data.year && <span class="project-meta__year">{data.year}</span>}
       </div>
 
-      <h1 class="project-title reveal" transition:name={`project-title-${slug}`}>
+      <h1 class="project-title reveal" transition:name={`project-title-${id}`}>
         {data.title}
       </h1>
 
