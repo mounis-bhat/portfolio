@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectTile from '../../components/ProjectTile.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
@@ -25,16 +24,17 @@ const { Content } = await render(project);
 <BaseLayout title={data.title} description={data.description}>
   <main class="page" id="main-content" transition:animate="fade">
 
-    <div class="project-hero">
-      <ProjectTile
-        id={id}
-        title={data.title}
-        category={data.category}
-        tags={data.tags}
-        image={data.image}
-        fill
-      />
-    </div>
+    {
+      data.image && (
+        <div class="project-hero">
+          <img
+            src={data.image}
+            alt={data.title}
+            transition:name={`project-image-${id}`}
+          />
+        </div>
+      )
+    }
 
     <div class="container">
 
