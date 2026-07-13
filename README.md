@@ -1,43 +1,44 @@
-# Astro Starter Kit: Minimal
+# Portfolio
 
-```sh
-bun create astro@latest -- --template minimal
-```
+My personal website and portfolio, live at [mounis.net](https://mounis.net).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Built with **Astro 7**, plain CSS, and the View Transitions API — no UI framework, minimal JavaScript, static output. The site has been rebuilt from scratch more than once: it started on **Next.js 12**, moved to **Astro 5**, and now runs on **Astro 7**.
 
-## 🚀 Project Structure
+## Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- **[Astro 7](https://astro.build)** — static output, Content Layer collections, View Transitions
+- **TypeScript** (strict)
+- **Plain CSS** — a small design-token system (colours, type scale, spacing) with light/dark themes via a `data-theme` attribute
+- **Self-hosted fonts** — Bricolage Grotesque (display), Instrument Sans (body), Geist Mono (code)
+- **[Bun](https://bun.sh)** — runtime and package manager
+
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/       # Astro components (Nav, ProjectCard, ProjectTile, …)
+├── content/          # Markdown content collections
+│   ├── works/        # Projects shown on /works
+│   └── blog/         # Blog posts
+├── content.config.ts # Collection schemas (Zod)
+├── data/             # Structured data (experience, skills, uses)
+├── layouts/          # BaseLayout
+├── pages/            # File-based routes
+└── styles/           # Global CSS + design tokens
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+All commands are run from the root of the project:
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Command             | Action                                       |
+| :------------------ | :------------------------------------------- |
+| `bun install`       | Install dependencies                         |
+| `bun run dev`       | Start the dev server at `localhost:4321`     |
+| `bun run build`     | Build the production site to `./dist/`       |
+| `bun run preview`   | Preview the production build locally         |
+| `bunx astro check`  | Type-check `.astro` files and content        |
 
-## 🧞 Commands
+## License
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+See [LICENSE](./LICENSE).

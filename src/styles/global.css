@@ -14,6 +14,10 @@
   --border-strong: rgba(26, 23, 20, 0.25);
   --accent:       #88ccca;
   --accent-dim:   rgba(136, 204, 202, 0.18);
+  /* Readable accent — for accent-coloured text/icons/borders on the page bg.
+     #88ccca is a light mint (great on dark, too pale as text on light), so
+     light mode uses a deep teal of the same hue; dark mode keeps the mint. */
+  --accent-strong: #0c6a62;
   --link:         #3d7aed;
   --link-hover:   #2560d4;
 
@@ -89,6 +93,7 @@
   --text-faint:   #6b6565;
   --border:       rgba(232, 224, 216, 0.10);
   --border-strong: rgba(232, 224, 216, 0.20);
+  --accent-strong: #88ccca;
   --link:         #ff63c3;
   --link-hover:   #ff82d0;
   --nav-bg:       rgba(32, 32, 35, 0.88);
@@ -152,7 +157,7 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-strong);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
