@@ -4,6 +4,7 @@ description: A fast, mobile-friendly calculator for working out annual Zakah acr
 year: 2026
 category: Web app
 tags: [SvelteKit, TypeScript, Tailwind CSS]
+github: https://github.com/mounis-bhat/zakah-calculator
 featured: false
 ---
 

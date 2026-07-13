@@ -4,6 +4,7 @@ description: A context-aware, dual-engine tool that distills Figma frames and de
 year: 2026
 category: Dev tool
 tags: [Go, SQLite, Figma API, AI]
+github: https://github.com/mounis-bhat/ui-prompter
 featured: true
 ---
 

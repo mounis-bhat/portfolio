@@ -4,6 +4,7 @@ description: A terminal UI tool for controlling screen brightness on Linux, buil
 year: 2025
 category: TUI
 tags: [Go, TUI, Linux, Bubble Tea]
+github: https://github.com/mounis-bhat/brightness-tui
 featured: true
 ---
 

@@ -4,6 +4,7 @@ description: My personal site — rebuilt from scratch more than once, evolving 
 year: 2026
 category: Personal site
 tags: [Astro, TypeScript, CSS, View Transitions]
+github: https://github.com/mounis-bhat/portfolio
 featured: true
 ---
 

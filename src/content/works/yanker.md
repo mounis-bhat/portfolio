@@ -4,6 +4,7 @@ description: A terminal clipboard helper for named values and secrets — browse
 year: 2026
 category: TUI
 tags: [Go, TUI, Bubble Tea, CLI]
+github: https://github.com/mounis-bhat/yanker
 featured: true
 ---
 

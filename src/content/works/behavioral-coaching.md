@@ -4,6 +4,7 @@ description: A full-stack behavioral-coaching application pairing a Go backend w
 year: 2026
 category: Full-stack
 tags: [Go, Genkit, SvelteKit, PostgreSQL]
+github: https://github.com/mounis-bhat/behavioral-coaching
 featured: false
 ---
 
