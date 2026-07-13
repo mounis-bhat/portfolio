@@ -6,10 +6,10 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { slug, data } = project;
+const { id, data } = project;
 ---
 
-<a href={`/works/${slug}`} class="project-card">
+<a href={`/works/${id}`} class="project-card">
   {
     data.image ? (
       <div class="project-card__image">
@@ -19,7 +19,7 @@ const { slug, data } = project;
           loading="lazy"
           width="600"
           height="338"
-          transition:name={`project-image-${slug}`}
+          transition:name={`project-image-${id}`}
         />
       </div>
     ) : (
@@ -39,7 +39,7 @@ const { slug, data } = project;
       }
     </div>
 
-    <h3 class="project-card__title" transition:name={`project-title-${slug}`}>
+    <h3 class="project-card__title" transition:name={`project-title-${id}`}>
       {data.title}
     </h3>
 

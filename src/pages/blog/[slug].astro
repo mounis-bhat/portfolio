@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
@@ -11,14 +11,14 @@ interface Props {
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 };
 
 const { post } = Astro.props;
 const { data } = post;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const formattedDate = data.pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -38,7 +38,7 @@ const formattedDate = data.pubDate.toLocaleDateString('en-US', {
         </time>
       </div>
 
-      <h1 class="post-title reveal" transition:name={`post-title-${post.slug}`}>
+      <h1 class="post-title reveal" transition:name={`post-title-${post.id}`}>
         {data.title}
       </h1>
 
