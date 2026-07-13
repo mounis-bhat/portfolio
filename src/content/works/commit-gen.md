@@ -2,8 +2,8 @@
 title: commit-gen
 description: A CLI tool written in Go that generates meaningful, conventional commit messages from your staged git diff.
 year: 2025
+category: CLI
 tags: [Go, CLI, Git, AI]
-github: https://github.com/mounis-bhat/commit-gen
 featured: true
 ---
 

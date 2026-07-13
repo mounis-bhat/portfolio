@@ -2,8 +2,8 @@
 title: brightness-tui
 description: A terminal UI tool for controlling screen brightness on Linux, built in Go using the Bubble Tea framework.
 year: 2025
+category: TUI
 tags: [Go, TUI, Linux, Bubble Tea]
-github: https://github.com/mounis-bhat/brightness-tui
 featured: true
 ---
 

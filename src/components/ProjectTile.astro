@@ -1,0 +1,164 @@
+---
+/*
+ * ProjectTile — the generated "cover" for a project that has no screenshot.
+ * A deterministic, on-brand gradient + texture derived from the project id,
+ * so every project gets a distinct but cohesive visual. Falls back to a real
+ * image when `image` is provided. Shared by the works grid and the detail hero
+ * so the View Transition image morph has a matching element on both pages.
+ */
+interface Props {
+  id: string;
+  title?: string;
+  category?: string;
+  tags?: string[];
+  image?: string;
+  fill?: boolean;
+  class?: string;
+}
+const { id, title, category, tags = [], image, fill = false, class: className } = Astro.props;
+
+// Curated gradient pairs (hue sat light) — deliberately muted so they harmonize
+// with the warm cream / mint palette in both light and dark mode.
+const THEMES = [
+  ['178 45% 55%', '196 55% 58%'], // teal → cyan
+  ['205 50% 56%', '236 46% 62%'], // blue → indigo
+  ['270 36% 60%', '314 42% 63%'], // violet → magenta
+  ['32 58% 60%', '8 56% 62%'], //    amber → rose
+  ['150 40% 52%', '176 46% 55%'], // green → teal
+  ['222 30% 56%', '250 34% 62%'], // slate → periwinkle
+];
+
+// FNV-1a hash → stable theme choice per project.
+let h = 2166136261;
+for (let i = 0; i < id.length; i++) {
+  h ^= id.charCodeAt(i);
+  h = Math.imul(h, 16777619);
+}
+const [g1, g2] = THEMES[Math.abs(h) % THEMES.length];
+const mark = (title ?? id).trim().charAt(0).toUpperCase();
+const tech = tags.slice(0, 3).join(' · ');
+---
+
+<div
+  class:list={['ptile', { 'ptile--fill': fill }, className]}
+  style={`--g1:${g1}; --g2:${g2};`}
+  transition:name={`project-image-${id}`}
+>
+  {
+    image ? (
+      <img src={image} alt={title ?? id} loading="lazy" width="600" height="338" />
+    ) : (
+      <div class="ptile__art">
+        <span class="ptile__mark" aria-hidden="true">{mark}</span>
+        <div class="ptile__meta">
+          {category && <span class="ptile__eyebrow">{category}</span>}
+          <span class="ptile__name">{id}</span>
+          {tech && <span class="ptile__tech">{tech}</span>}
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .ptile {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--bg-elevated);
+    flex-shrink: 0;
+  }
+
+  .ptile--fill {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
+  .ptile > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ptile__art {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(115% 115% at 82% 12%, hsl(var(--g2) / 0.32) 0%, transparent 55%),
+      radial-gradient(120% 120% at 10% 105%, hsl(var(--g1) / 0.36) 0%, transparent 60%),
+      linear-gradient(135deg, hsl(var(--g1) / 0.1), hsl(var(--g2) / 0.05));
+  }
+
+  /* Faint dot-grid texture, faded diagonally so it never competes with text. */
+  .ptile__art::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--text) 1px, transparent 1px);
+    background-size: 15px 15px;
+    opacity: 0.05;
+    -webkit-mask-image: linear-gradient(125deg, #000, transparent 68%);
+    mask-image: linear-gradient(125deg, #000, transparent 68%);
+  }
+
+  /* Large faded monogram — per-project variation. */
+  .ptile__mark {
+    position: absolute;
+    top: -0.28em;
+    right: 0.06em;
+    font-family: var(--font-display);
+    font-size: 8.5rem;
+    line-height: 1;
+    font-weight: 600;
+    color: hsl(var(--g1));
+    opacity: 0.16;
+    user-select: none;
+  }
+
+  .ptile__meta {
+    position: absolute;
+    left: var(--space-5);
+    right: var(--space-5);
+    bottom: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .ptile__eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+
+  .ptile__name {
+    font-family: var(--font-mono);
+    font-size: var(--text-md);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ptile__tech {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Larger hero variant reads a touch bigger. */
+  .ptile--fill .ptile__mark {
+    font-size: 12rem;
+  }
+  .ptile--fill .ptile__name {
+    font-size: var(--text-lg);
+  }
+</style>
