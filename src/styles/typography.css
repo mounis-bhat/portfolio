@@ -58,7 +58,7 @@ h4 { font-size: var(--text-lg); }
   left: 0;
   width: 2.5rem;
   height: 2px;
-  background-color: var(--accent);
+  background-color: var(--accent-strong);
   border-radius: 1px;
 }
 

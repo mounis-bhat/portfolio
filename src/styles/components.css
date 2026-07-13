@@ -35,7 +35,7 @@
   font-size: var(--text-sm);
   font-weight: 500;
   background-color: var(--accent-dim);
-  color: var(--accent);
+  color: var(--accent-strong);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-full);
   margin-bottom: var(--space-6);
@@ -53,7 +53,7 @@
 
 .coming-soon__icon {
   font-size: var(--text-2xl);
-  color: var(--accent);
+  color: var(--accent-strong);
   margin-bottom: var(--space-4);
   line-height: 1;
 }
@@ -93,9 +93,9 @@
   gap: var(--space-2);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--accent);
+  color: var(--accent-strong);
   text-decoration: none;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--accent-strong);
   padding: var(--space-2) var(--space-5);
   border-radius: var(--radius-md);
   transition:
@@ -105,5 +105,5 @@
 
 .btn-outline:hover {
   background-color: var(--accent-dim);
-  color: var(--accent);
+  color: var(--accent-strong);
 }

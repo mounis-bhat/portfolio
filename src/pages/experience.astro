@@ -151,20 +151,20 @@ import { experience, education, certifications } from '../data/experience';
   .exp-item__company {
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--accent);
+    color: var(--accent-strong);
     margin-bottom: var(--space-4);
     line-height: 1.4;
   }
 
   .exp-item__company-link {
-    color: var(--accent);
+    color: var(--accent-strong);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color var(--dur-fast) var(--ease-out);
   }
 
   .exp-item__company-link:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-strong);
   }
 
   .exp-item__location {
@@ -198,17 +198,22 @@ import { experience, education, certifications } from '../data/experience';
     background-color: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    transition: border-color var(--dur-base) var(--ease-out);
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .cert-item:hover {
-    border-color: var(--border-strong);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
   }
 
   .cert-item__issuer {
     font-size: var(--text-xs);
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-strong);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: var(--space-2);
