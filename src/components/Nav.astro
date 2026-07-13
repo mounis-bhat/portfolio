@@ -318,6 +318,27 @@ function isActive(href: string) {
     bindHamburger();
   }
 
+  // The nav is transition:persist, so its build-time active class is stale
+  // after client-side navigations. Recompute it from the current URL on every
+  // swap. Mirrors the isActive() logic in the component frontmatter.
+  function updateActiveLinks() {
+    const path = window.location.pathname;
+    const isActive = (href: string) =>
+      href === '/' ? path === '/' : path.startsWith(href);
+    document.querySelectorAll<HTMLAnchorElement>('.nav__link, .drawer__link').forEach((el) => {
+      const href = el.getAttribute('href');
+      if (!href) return;
+      const active = isActive(href);
+      const cls = el.classList.contains('drawer__link') ? 'drawer__link--active' : 'nav__link--active';
+      el.classList.toggle(cls, active);
+      if (active) el.setAttribute('aria-current', 'page');
+      else el.removeAttribute('aria-current');
+    });
+  }
+
   bindHamburger();
-  document.addEventListener('astro:after-swap', closeDrawer);
+  document.addEventListener('astro:after-swap', () => {
+    closeDrawer();
+    updateActiveLinks();
+  });
 </script>
