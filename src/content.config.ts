@@ -8,6 +8,8 @@ const works = defineCollection({
     title: z.string(),
     description: z.string(),
     year: z.number().optional(),
+    // Short eyebrow label shown on the generated project tile (e.g. "CLI", "TUI", "Web app", "Client work").
+    category: z.string().optional(),
     image: z.string().optional(),
     tags: z.array(z.string()).optional(),
     github: z.url().optional(),

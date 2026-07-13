@@ -8,27 +8,17 @@ interface Props {
 
 const { project } = Astro.props;
 const { id, data } = project;
+const source = data.github ? 'Source' : data.url ? 'Live' : null;
 ---
 
 <a href={`/works/${id}`} class="project-card">
-  {
-    data.image ? (
-      <div class="project-card__image">
-        <img
-          src={data.image}
-          alt={data.title}
-          loading="lazy"
-          width="600"
-          height="338"
-          transition:name={`project-image-${id}`}
-        />
-      </div>
-    ) : (
-      <div class="project-card__image project-card__image--placeholder">
-        <span class="project-card__placeholder-icon" aria-hidden="true">⬡</span>
-      </div>
-    )
-  }
+  <ProjectTile
+    id={id}
+    title={data.title}
+    category={data.category}
+    tags={data.tags}
+    image={data.image}
+  />
 
   <div class="project-card__body">
     <div class="project-card__meta">
