@@ -12,12 +12,12 @@ I've built a handful of small CLI tools in Go over the past year — a commit me
 The first thing someone does with an unfamiliar CLI is run `--help`. Make that output genuinely useful:
 
 ```
-$ commit-gen --help
+$ commitmsg --help
 
 Generate a conventional commit message from your staged diff.
 
 Usage:
-  commit-gen [flags]
+  commitmsg [flags]
 
 Flags:
   -d, --dry-run   Print the message without committing
